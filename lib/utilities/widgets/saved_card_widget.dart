@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 
 class SavedCardWidget extends StatelessWidget {
-  const SavedCardWidget({Key? key, required this.index}) : super(key: key);
+  const SavedCardWidget({Key? key, required this.card}) : super(key: key);
 
-  final int index;
+  final String card;
 
   @override
   Widget build(BuildContext context) {
     return Image.asset(
-      'assets/images/visa_card${index % 2 + 1}.png',
+      card,
     );
   }
 }

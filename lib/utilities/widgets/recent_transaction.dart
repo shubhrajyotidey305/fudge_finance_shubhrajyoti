@@ -1,37 +1,37 @@
 import 'package:flutter/material.dart';
+import 'package:fudge_finance/models/recent_transaction_model.dart';
+
+import '../constant.dart';
 
 class RecentTransactionWidget extends StatelessWidget {
-  const RecentTransactionWidget({Key? key, required this.index})
+  const RecentTransactionWidget(
+      {Key? key, required this.recentTransactionModel})
       : super(key: key);
 
-  final int index;
+  final RecentTransactionModel recentTransactionModel;
 
   @override
   Widget build(BuildContext context) {
     return Row(
-      crossAxisAlignment: CrossAxisAlignment.start,
+      crossAxisAlignment: CrossAxisAlignment.center,
       children: [
         Image.asset(
-          'assets/images/user_profile.png',
+          recentTransactionModel.logo,
           height: 35,
           width: 35,
         ),
         const SizedBox(
           width: 16,
         ),
-        const Column(
+        Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
+            Text(recentTransactionModel.name),
+            const SizedBox(height: 3),
             Text(
-              'John Doe',
-            ),
-            SizedBox(
-              height: 3,
-            ),
-            Text(
-              'United Kingdom',
-              style: TextStyle(
+              recentTransactionModel.country,
+              style: const TextStyle(
                 color: Colors.grey,
                 fontSize: 10,
               ),
@@ -39,18 +39,14 @@ class RecentTransactionWidget extends StatelessWidget {
           ],
         ),
         const Spacer(),
-        const Column(
+        Column(
           crossAxisAlignment: CrossAxisAlignment.end,
           children: [
+            Text(recentTransactionModel.amount),
+            const SizedBox(height: 3),
             Text(
-              '80,000 AED',
-            ),
-            SizedBox(
-              height: 3,
-            ),
-            Text(
-              '11 Aug 2021',
-              style: TextStyle(
+              recentTransactionModel.date,
+              style: const TextStyle(
                 color: Colors.grey,
                 fontSize: 10,
               ),
@@ -61,9 +57,9 @@ class RecentTransactionWidget extends StatelessWidget {
           width: 16,
         ),
         Image.asset(
-          index == 0
-              ? 'assets/images/in_progress.png'
-              : 'assets/images/check_circle_fill.png',
+          recentTransactionModel.isProcessing
+              ? ImageAssets.processCircle
+              : ImageAssets.checkCircle,
           height: 12,
           width: 12,
         ),

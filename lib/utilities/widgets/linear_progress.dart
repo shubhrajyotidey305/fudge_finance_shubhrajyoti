@@ -3,13 +3,14 @@ import 'package:flutter/material.dart';
 import '../constant.dart';
 
 class LinearProgressWidget extends StatelessWidget {
-  final Color color;
-  final double progress;
   const LinearProgressWidget({
     Key? key,
     required this.color,
     required this.progress,
   }) : super(key: key);
+
+  final Color color;
+  final double progress;
 
   @override
   Widget build(BuildContext context) {
@@ -23,13 +24,11 @@ class LinearProgressWidget extends StatelessWidget {
             fontSize: 14,
           ),
         ),
-        const SizedBox(
-          height: 8,
-        ),
+        const SizedBox(height: 8),
         LinearProgressIndicator(
           color: color,
           value: progress,
-          backgroundColor: Colors.blueGrey.withOpacity(0.3),
+          backgroundColor: grey6,
         )
       ],
     );

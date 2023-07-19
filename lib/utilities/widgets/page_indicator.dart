@@ -11,7 +11,7 @@ class PageIndicator extends StatelessWidget {
   Widget build(BuildContext context) {
     return AnimatedBuilder(
         animation: pageController,
-        builder: (_, __) {
+        builder: (ctx, widget) {
           final page = pageController.page?.round() ?? 0;
           return Row(
             mainAxisAlignment: MainAxisAlignment.center,

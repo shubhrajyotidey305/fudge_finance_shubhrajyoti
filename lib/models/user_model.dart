@@ -62,7 +62,7 @@ class Address {
         suite: json["suite"],
         city: json["city"],
         zipcode: json["zipcode"],
-        geo: json["geo"] == null ? null : Geo.fromJson(json["geo"]),
+        geo: Geo.fromJson(json["geo"]),
       );
 
   Map<String, dynamic> toJson() => {
@@ -70,7 +70,7 @@ class Address {
         "suite": suite,
         "city": city,
         "zipcode": zipcode,
-        "geo": geo == null ? null : geo!.toJson(),
+        "geo": geo!.toJson(),
       };
 }
 

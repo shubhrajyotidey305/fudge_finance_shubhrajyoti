@@ -8,11 +8,9 @@ class ChatWidget extends StatefulWidget {
   State<ChatWidget> createState() => _ChatWidgetState();
 }
 
-class _ChatWidgetState extends State<ChatWidget>
-    with AutomaticKeepAliveClientMixin {
+class _ChatWidgetState extends State<ChatWidget> {
   @override
   Widget build(BuildContext context) {
-    super.build(context);
     return TweenAnimationBuilder(
       duration: const Duration(milliseconds: 600),
       tween: Tween<Offset>(begin: const Offset(1, 0), end: const Offset(0, 0)),
@@ -25,12 +23,8 @@ class _ChatWidgetState extends State<ChatWidget>
       child: AspectRatio(
         aspectRatio: 1.70,
         child: Padding(
-          padding: const EdgeInsets.only(
-            right: 20,
-            left: 20,
-            top: 20,
-            bottom: 20,
-          ),
+          padding:
+              const EdgeInsets.only(top: 20, bottom: 20, left: 20, right: 30),
           child: LineChart(
             mainData(),
           ),
@@ -86,11 +80,6 @@ class _ChatWidgetState extends State<ChatWidget>
 
     return SideTitleWidget(
       axisSide: meta.axisSide,
-      fitInside: const SideTitleFitInsideData(
-          distanceFromEdge: 0,
-          enabled: true,
-          axisPosition: -25,
-          parentAxisSize: 0),
       child: Text(text, style: style, textAlign: TextAlign.center),
     );
   }
@@ -191,12 +180,12 @@ class _ChatWidgetState extends State<ChatWidget>
       lineBarsData: [
         LineChartBarData(
           spots: const [
-            FlSpot(0, 270),
+            FlSpot(0, 280),
             FlSpot(1, 250),
-            FlSpot(2, 300),
-            FlSpot(3, 450),
-            FlSpot(4, 210),
-            FlSpot(5, 150),
+            FlSpot(2, 450),
+            FlSpot(3, 50),
+            FlSpot(4, 200),
+            FlSpot(5, 50),
           ],
           isCurved: true,
           barWidth: 1,
@@ -251,7 +240,4 @@ class _ChatWidgetState extends State<ChatWidget>
       ],
     );
   }
-
-  @override
-  bool get wantKeepAlive => true;
 }

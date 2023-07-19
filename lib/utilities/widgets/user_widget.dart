@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../constant.dart';
+
 class UserWidget extends StatelessWidget {
   final String name;
   const UserWidget({
@@ -16,7 +18,7 @@ class UserWidget extends StatelessWidget {
         children: [
           Expanded(
             child: Image.asset(
-              'assets/images/user.png',
+              ImageAssets.user,
             ),
           ),
           const SizedBox(

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:fudge_finance/models/test_data.dart';
 
 import '../utilities/constant.dart';
 import '../utilities/widgets/page_indicator.dart';
@@ -41,7 +42,7 @@ class _TransactionViewState extends State<TransactionView> {
             IconButton(
               onPressed: () => Navigator.pop(context),
               icon: SvgPicture.asset(
-                'assets/images/arrow_right.svg',
+                ImageAssets.arrowRight,
                 height: 12,
                 width: 12,
               ),
@@ -57,7 +58,7 @@ class _TransactionViewState extends State<TransactionView> {
         ),
         actions: [
           SvgPicture.asset(
-            'assets/images/menu.svg',
+            ImageAssets.menu,
             height: 12,
             width: 12,
           ),
@@ -70,80 +71,107 @@ class _TransactionViewState extends State<TransactionView> {
         length: 5,
         child: Column(
           children: [
-            SizedBox(
-              height: 180,
-              child: PageView.builder(
-                  padEnds: false,
-                  itemCount: 2,
-                  scrollDirection: Axis.horizontal,
-                  controller: _pageController,
-                  itemBuilder: (_, index) {
-                    return SavedCardWidget(index: index);
-                  }),
-            ),
-            const SizedBox(
-              height: 20,
-            ),
-            PageIndicator(
-              totalPage: 2,
-              pageController: _pageController,
-            ),
-            const SizedBox(
-              height: 20,
-            ),
-            TabBar(
-              isScrollable: true,
-              unselectedLabelColor: grey4,
-              labelColor: Colors.black,
-              indicatorColor: grey5,
-              indicatorWeight: 4,
-              indicatorSize: TabBarIndicatorSize.label,
-              labelPadding:
-                  const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-              tabs: List<Widget>.generate(
-                5,
-                (int index) => Text(
-                  'Menu title $index',
-                ),
-              ),
-            ),
-            Expanded(
-              child: TabBarView(
-                children: List<Widget>.generate(
-                  5,
-                  (int i) => ListView(
-                    padding: const EdgeInsets.all(20),
-                    children: [
-                      const Text(
-                        'RECENT TRANSACTIONS',
-                        style: TextStyle(
-                          color: Colors.black,
-                          fontSize: 12,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                      const SizedBox(
-                        height: 20,
-                      ),
-                      ListView.separated(
-                        separatorBuilder: (_, j) => const SizedBox(
-                          height: 20,
-                        ),
-                        shrinkWrap: true,
-                        physics: const NeverScrollableScrollPhysics(),
-                        itemCount: 10,
-                        itemBuilder: (_, index) {
-                          return RecentTransactionWidget(index: index);
-                        },
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-            )
+            CardView(pageController: _pageController),
+            const SizedBox(height: 20),
+            PageIndicator(totalPage: 2, pageController: _pageController),
+            const SizedBox(height: 20),
+            const MenuBarView(),
+            const RecentTransactionsFullView(),
           ],
         ),
       ),
+    );
+  }
+}
+
+// Recent transactions scrollable list
+class RecentTransactionsFullView extends StatelessWidget {
+  const RecentTransactionsFullView({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Expanded(
+      child: TabBarView(
+        children: List<Widget>.generate(
+          5,
+          (i) => ListView(
+            padding: const EdgeInsets.all(20),
+            children: [
+              const Text(
+                'RECENT TRANSACTIONS',
+                style: TextStyle(
+                  color: Colors.black,
+                  fontSize: 12,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+              const SizedBox(
+                height: 20,
+              ),
+              ListView.separated(
+                separatorBuilder: (ctx, index) => const SizedBox(
+                  height: 20,
+                ),
+                shrinkWrap: true,
+                physics: const NeverScrollableScrollPhysics(),
+                itemCount: 10,
+                itemBuilder: (ctx, index) {
+                  return RecentTransactionWidget(
+                      recentTransactionModel: recentTransactionList[index]);
+                },
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+// Menu bar scrollable list
+class MenuBarView extends StatelessWidget {
+  const MenuBarView({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return TabBar(
+      isScrollable: true,
+      unselectedLabelColor: grey4,
+      labelColor: Colors.black,
+      indicatorColor: grey5,
+      indicatorWeight: 4,
+      indicatorSize: TabBarIndicatorSize.label,
+      labelPadding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+      tabs: menuTitles.map((menuTitle) => Text(menuTitle)).toList(),
+    );
+  }
+}
+
+// Swipe to view card
+class CardView extends StatelessWidget {
+  const CardView({
+    super.key,
+    required PageController pageController,
+  }) : _pageController = pageController;
+
+  final PageController _pageController;
+
+  @override
+  Widget build(BuildContext context) {
+    return SizedBox(
+      height: 180,
+      child: PageView.builder(
+          padEnds: false,
+          itemCount: 2,
+          scrollDirection: Axis.horizontal,
+          controller: _pageController,
+          itemBuilder: (ctx, index) {
+            return SavedCardWidget(card: cards[index]);
+          }),
     );
   }
 }
