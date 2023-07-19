@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:fudge_finance/models/recent_transaction_model.dart';
 import 'package:fudge_finance/utilities/constant.dart';
 

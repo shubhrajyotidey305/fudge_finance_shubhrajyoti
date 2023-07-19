@@ -1,16 +1,30 @@
 # Fudge Finance Application
 
-A new Flutter project.
+A Flutter project.
 
-## Getting Started
+# How to Run App
 
-This project is a starting point for a Flutter application.
+## Instructions For iOS (in Mac)
 
-A few resources to get you started if this is your first Flutter project:
+**Connection to physical iPhone device ***OR*** Run in xcode. Start a Simulator.**
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+- Clone the repository from github into Mac (with X-Code Installed)
+- Open terminal.
+- Type "Flutter run" (it will automatically run flutter pub get) (It will launch on the already running iOS simulator)
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+## Instructions For Android (in Windows/Ubuntu)
+
+**Connection to physical Android device ***OR*** Run on Emulator.**
+
+- Clone the repository from github into Windows(with Android Studio / Vs Code)
+- Open terminal.
+- Type "pub get"
+- Type "Flutter run" 
+
+**To generate apk file**
+
+- Clone the repository from github into Windows(with Android Studio / Vs Code)
+- Open terminal.
+- Type "pub get"
+- Type "Flutter build apk --release"
+- Get the apk in build\app\outputs\flutter-apk\app-release.apk 
